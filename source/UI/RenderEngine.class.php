@@ -48,11 +48,12 @@ final class RenderEngine
         $success = true;
 
         // Create the directory <path-to-template>/mustache/partials
-        $partialsPath = $this->getBaseDirectory() . '/partials/';
-        if( !file_exists( $partialsPath ) ){
-            $success = $this->makeDirectoryFromPath( $partialsPath );
+        $cacheDirectory = $this->getBaseDirectory() . "/cache/";
+        if( !file_exists( $cacheDirectory ) ){
+            $success = $this->makeDirectoryFromPath( $cacheDirectory );
         }
-        $cachePath = $this->getBaseDirectory() . '/cache/';
+
+        $cachePath = $this->getBaseDirectory() . "/partials/";
         if( !file_exists( $cachePath ) ){
             $success = $this->makeDirectoryFromPath( $cachePath );
         }
@@ -138,7 +139,7 @@ final class RenderEngine
 
     public function getBaseDirectory()
     {
-        return untrailingslashit($this->templateFolder);
+        return untrailingslashit($this->templateFolder) . "/$this->type/" ;
     }
 
     private function parseFileName($fileName)

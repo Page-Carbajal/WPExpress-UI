@@ -13,6 +13,7 @@ HTML Builder and Render Engine for WPExpress.
 
 ###Version 0.5
 
+- Fixed errors on the RenderEngine class
 - Made the RenderEngine class final
 - Simplified the constructor
 - Added two error throwing exceptions
