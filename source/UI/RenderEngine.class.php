@@ -58,7 +58,7 @@ final class RenderEngine
         }
 
         if( !$success ) {
-            throw new \Exception('Error: Cant write in the specified template path. Check for permissions. - WPExpress/UI @ RenderEngine');
+            trigger_error('Error: Cant write in the specified template path. Check for permissions. - WPExpress/UI @ RenderEngine');
         }
 
         return $this;
@@ -176,11 +176,21 @@ final class RenderEngine
 
     private function renderMustacheTemplate( $fileName, $context )
     {
-        $options                    = array();
-        $options['cache']           = $this->getBaseDirectory() . '/cache';
-        $options['loader']          = new Mustache_Loader_FilesystemLoader($this->getBaseDirectory());
-        $options['partials_loader'] = new Mustache_Loader_FilesystemLoader($this->getBaseDirectory() . '/partials');
-        $options['charset']         = 'UTF-8';
+        $options = array();
+        $options['loader'] = new Mustache_Loader_FilesystemLoader($this->getBaseDirectory());
+        $options['charset'] = 'UTF-8';
+
+        if( file_exists($this->getBaseDirectory() . '/cache') ) {
+            $options['cache'] = $this->getBaseDirectory() . '/cache';
+        } else {
+            trigger_error('No cache directory has been defined for Mustache templates. WPExpress/UI @ RenderEngine');
+        }
+
+        if( file_exists($this->getBaseDirectory() . '/partials') ) {
+            $options['partials_loader'] = new Mustache_Loader_FilesystemLoader($this->getBaseDirectory() . '/partials');
+        } else {
+            trigger_error('No partials directory has been defined for Mustache templates. WPExpress/UI @ RenderEngine');
+        }
 
         if( function_exists('apply_filters') ) {
             // Prevent the use of WordPress specific functions
@@ -195,6 +205,10 @@ final class RenderEngine
 
     private function renderTwigTemplate( $fileName, $context )
     {
+        if( !file_exists( $this->getBaseDirectory() . '/cache' ) ){
+            throw new \Exception( 'No cache directory has been defined for Twig. - WPExpress/UI @ Render Engine.', 404 );
+        }
+
         $loader   = new Twig_Loader_Filesystem($this->getBaseDirectory());
         $twig     = new Twig_Environment($loader, array( 'cache' => $this->getBaseDirectory() . '/cache' ));
         $fileName = $this->parseFileName($fileName);
