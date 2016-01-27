@@ -158,7 +158,8 @@ final class RenderEngine
 
     public function renderTemplate( $fileName, $context )
     {
-        if( $template = $this->getTemplatePath($fileName) ) {
+        $template = $this->getTemplatePath($fileName);
+        if( $template !== false ) {
             switch( $this->type ) {
                 case "twig":
                     $raw = $this->renderTwigTemplate($fileName, $context);
