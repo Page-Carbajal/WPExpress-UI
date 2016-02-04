@@ -14,10 +14,8 @@ HTML Builder and Render Engine for WPExpress.
 
 ###Version 0.5.2 - Updated dependencies, removed tests files
 
-- Added mustache/test to gitignore
-- Removed mustache/test directory from repository
-- Added twig/doc and twig/test to gitignore
-- Removed twig/doc and twig/test from repository
+- Added vendor directory and composer.lock to gitignore
+- Removed the vendor directory
 - Updated twig version
 
 

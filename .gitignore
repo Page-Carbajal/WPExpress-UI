@@ -1,4 +1,2 @@
-vendor/twig/twig/doc
-vendor/twig/twig/test
-vendor/mustache/mustache/test
+vendor/
 composer.lock
