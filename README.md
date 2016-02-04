@@ -12,6 +12,13 @@ HTML Builder and Render Engine for WPExpress.
 - Create Formatting class a port of WordPress functions to sanitize titles and file names
 
 
+###Version 0.5.2 - Update dependencies, remove tests files
+
+- Added twig/doc and twig/test to gitignore
+- Removed twig/doc and twig/test from repository
+- Updated twig version
+
+
 ###Version 0.5.1 - Fixed: Exception on renderMustacheTemplate
 
 - Added exception for cache directory on renderTwigTemplate method
