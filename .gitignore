@@ -1,3 +1,4 @@
 vendor/twig/twig/doc
 vendor/twig/twig/test
 vendor/mustache/mustache/test
+composer.lock
