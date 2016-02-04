@@ -12,7 +12,7 @@ HTML Builder and Render Engine for WPExpress.
 - Create Formatting class a port of WordPress functions to sanitize titles and file names
 
 
-###Version 0.5.2 - Update dependencies, remove tests files
+###Version 0.5.2 - Updated dependencies, removed tests files
 
 - Added mustache/test to gitignore
 - Removed mustache/test directory from repository
