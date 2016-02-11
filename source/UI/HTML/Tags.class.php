@@ -55,7 +55,7 @@ class Tags
     public static function radioButtonField($name, $attributes)
     {
         $defaultProperties = array(
-            'type' => 'checkbox',
+            'type' => 'radio',
             'name' => $name,
         );
 
@@ -136,6 +136,15 @@ class Tags
         return $field;
     }
 
+    public static function textArea( $name, $value, $attributes )
+    {
+        $properties = array( 'id' => $name, 'name' => $name );
+        $attsString = self::arrayToHTMLAttributes( array_merge($properties, $attributes) );
+        $output = "<textarea {$attsString}>{$value}</textarea>";
+
+        return $output;
+    }
+
 
     public static function parseFields($collection)
     {
@@ -148,14 +157,19 @@ class Tags
                     $list[] = self::selectField($item['name'], $item['options'], $item['properties']);
                     break;
                 case "radio":
+                    $list[] = self::radioButtonField( $item['name'], $item['properties'] );
                     break;
                 case "radiobutton":
+                    $list[] = self::radioButtonField( $item['name'], $item['properties'] );
                     break;
                 case "check":
                     $list[] = self::checkboxField($item['name'], $item['properties']);
                     break;
                 case "checkbox":
                     $list[] = self::checkboxField($item['name'], $item['properties']);
+                    break;
+                case "textarea":
+                    $list[] = self::textArea($item['name'], $item['value'], $item['properties']);
                     break;
                 default:
                     $list[] = self::textField($item['name'], $item['properties']);
