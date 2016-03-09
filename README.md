@@ -11,6 +11,13 @@ HTML Builder and Render Engine for WPExpress.
 
 - Create Formatting class a port of WordPress functions to sanitize titles and file names
 
+###Version 1.0.0
+
+- Added method FieldCollection/parse
+- Renamed Tags to HTMLFieldParser
+- Renamed UI to BaseResources 
+- Dropped UI folder
+
 
 ###Version 0.5.4 
 
