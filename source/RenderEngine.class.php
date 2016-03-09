@@ -58,7 +58,7 @@ final class RenderEngine
         }
 
         if( !$success ) {
-            trigger_error('Error: Cant write in the specified template path. Check for permissions. - WPExpress/UI @ RenderEngine', E_USER_WARNING);
+            trigger_error('Error: Cant write in the specified template path. Check for permissions. - WPExpress/UI @ RenderEngine', E_USER_NOTICE);
         }
 
         return $this;
@@ -184,13 +184,13 @@ final class RenderEngine
         if( file_exists($this->getBaseDirectory() . '/cache') ) {
             $options['cache'] = $this->getBaseDirectory() . '/cache';
         } else {
-            trigger_error('No cache directory has been defined for Mustache templates. WPExpress/UI @ RenderEngine');
+            trigger_error('No cache directory has been defined for Mustache templates. WPExpress/UI @ RenderEngine', E_USER_NOTICE);
         }
 
         if( file_exists($this->getBaseDirectory() . '/partials') ) {
             $options['partials_loader'] = new Mustache_Loader_FilesystemLoader($this->getBaseDirectory() . '/partials');
         } else {
-            trigger_error('No partials directory has been defined for Mustache templates. WPExpress/UI @ RenderEngine');
+            trigger_error('No partials directory has been defined for Mustache templates. WPExpress/UI @ RenderEngine', E_USER_NOTICE);
         }
 
         if( function_exists('apply_filters') ) {

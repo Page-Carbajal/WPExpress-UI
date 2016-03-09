@@ -22,51 +22,36 @@ class HTMLFieldParser
         }
     }
 
-    private static function getBaseAttributes( $name, $ID )
+    public static function textField( $name, $attributes, $fieldProperties = null, $ID = null )
     {
-        $controlID = empty( $ID ) ? $name : $ID;
-        return array( 'id' => $controlID, 'name' => $name );
+        return self::renderInputField($name, 'text', $attributes, $fieldProperties, $ID);
     }
 
-    public static function textField( $name, $attributes, $ID = null )
+    public static function hiddenField( $name, $attributes, $fieldProperties = null, $ID = null )
     {
-        $attributes         = self::getBaseAttributes($name, $ID);
-        $attributes['type'] = 'text';
-
-        return self::renderInputField(array_merge($attributes, $attributes));
+        return self::renderInputField($name, 'hidden', $attributes, $fieldProperties, $ID);
     }
 
-    public static function hiddenField( $name, $attributes, $ID = null )
+    public static function checkboxField( $name, $attributes, $fieldProperties = null, $ID = null )
     {
-        $attributes         = self::getBaseAttributes($name, $ID = null);
-        $attributes['type'] = 'hidden';
-
-        return self::renderInputField(array_merge($attributes, $attributes));
+        return self::renderInputField($name, 'checkbox', $attributes, $fieldProperties, $ID);
     }
 
-    public static function checkboxField( $name, $attributes, $ID = null )
+    public static function radioButtonField( $name, $attributes, $fieldProperties = null, $ID = null )
     {
-        $attributes         = self::getBaseAttributes($name, $ID);
-        $attributes['type'] = 'checkbox';
-
-        return self::renderInputField(array_merge($attributes, $attributes));
+        return self::renderInputField($name, 'radio', $attributes, $fieldProperties, $ID);
     }
 
-    public static function radioButtonField( $name, $attributes, $ID = null )
+    private static function renderInputField( $name, $type, $attributes, $fieldProperties, $ID )
     {
-        $attributes         = self::getBaseAttributes($name, $ID);
-        $attributes['type'] = 'radio';
-
-        return self::renderInputField(array_merge($attributes, $attributes));
-    }
-
-    protected static function renderInputField( $attributes )
-    {
-        $atts = self::arrayToHTMLAttributes($attributes);
+        $controlID       = empty( $ID ) ? $name : $ID;
+        $baseAttributes  = array( 'type' => $type, 'id' => $controlID, 'name' => $name );
+        $attString       = self::arrayToHTMLAttributes(array_merge($baseAttributes, $attributes));
+        $fieldProperties = empty( $fieldProperties ) ? array() : ( is_array($fieldProperties) ? $fieldProperties : array( $fieldProperties ) );
 
         $field             = new \stdClass();
-        $field->html       = "<input {$atts} />";
-        $field->properties = $attributes;
+        $field->html       = "<input {$attString} />";
+        $field->properties = array_merge($baseAttributes, $attributes, $fieldProperties);
 
         return $field;
     }
@@ -93,7 +78,7 @@ class HTMLFieldParser
      * @param $attributes
      * @return bool|string
      */
-    public static function selectField( $name, $options, $attributes, $ID = null )
+    public static function selectField( $name, $options, $attributes, $value = null, $fieldProperties = null, $ID = null )
     {
         if( empty( $name ) ) {
             return false;
@@ -104,46 +89,57 @@ class HTMLFieldParser
             return false;
         }
 
-        $properties = array( 'id' => $name, 'name' => $name );
-        $source     = '';
+        $fieldProperties   = empty( $fieldProperties ) ? array() : ( is_array($fieldProperties) ? $fieldProperties : array( $fieldProperties ) );
+        $baseAttributes    = array( 'id' => $name, 'name' => $name );
+        $source            = '';
+        $hasSelectedOption = false;
 
         foreach( $options as $item ) {
-            $option = '';
+            $option         = '';
+            $selectedOption = '';
+
+            if( !$hasSelectedOption && ( isset( $item['selected'] ) || ( $item == $value ) || ( isset( $item['value'] ) && $value == $item['value'] ) ) ) {
+                $selectedOption    = 'selected="selected"';
+                $hasSelectedOption = true;
+            }
+
             if( !is_array($item) ) {
-                $option .= "<option value=\"{$item}\">{$item}</option>";
+                $option .= "<option {$selectedOption} value=\"{$item}\">{$item}</option>";
             } else {
                 $option = "<option ";
                 if( isset( $item['value'] ) ) {
-                    $option .= " value=\"{$item['value']}\"";
+                    $option .= " value=\"{$item['value']}\" {$selectedOption}";
                 } else {
-                    $option .= " value=\"{$item['text']}\"";
+                    $option .= " value=\"{$item['text']}\" {$selectedOption}";
                 }
 
-                if( isset( $item['selected'] ) && $item['selected'] == true ) {
-                    $option .= ' selected="selected" ';
-                }
                 $option = trim($option) . ">{$item['text']}</option>";
             }
             $source .= $option;
         }
 
-        $attsString = self::arrayToHTMLAttributes(array_merge($properties, $attributes));
+        $attsString = self::arrayToHTMLAttributes(array_merge($baseAttributes, $attributes));
         $output     = "<select {$attsString}>{$source}</select>";
 
         $field             = new \stdClass();
         $field->html       = $output;
-        $field->properties = array_merge($properties, $attributes, array( 'options' => $options ));
+        $field->properties = array_merge($baseAttributes, $attributes, array( 'options' => $options ), $fieldProperties);
 
         return $field;
     }
 
-    public static function textArea( $name, $value, $attributes, $ID = null )
+    public static function textArea( $name, $value, $attributes, $fieldProperties = null, $ID = null )
     {
-        $properties = self::getBaseAttributes($name, $ID);
-        $attsString = self::arrayToHTMLAttributes(array_merge($properties, $attributes));
-        $output     = "<textarea {$attsString}>{$value}</textarea>";
+        $controlID       = empty( $ID ) ? $name : $ID;
+        $fieldProperties = empty( $fieldProperties ) ? array() : ( is_array($fieldProperties) ? $fieldProperties : array( $fieldProperties ) );
+        $baseAttributes  = array( 'name' => $name, 'id' => $controlID );
+        $attsString      = self::arrayToHTMLAttributes(array_merge($baseAttributes, $attributes));
 
-        return $output;
+        $field             = new \stdClass();
+        $field->html       = "<textarea {$attsString}>{$value}</textarea>";
+        $field->properties = array_merge($baseAttributes, $attributes, $fieldProperties);
+
+        return $field;
     }
 
 
@@ -156,25 +152,25 @@ class HTMLFieldParser
             switch( $field->type ) {
                 case "select":
                     // Why not simply pass the field object? Well, we could, but we'll be forcing you to use our FieldCollection. So we keep it cool.
-                    $list[] = $this->selectField($field->name, $field->properties['options'], $field->attributes, $field->ID);
+                    $list[] = $this->selectField($field->name, $field->properties['options'], $field->attributes, $field->properties['value'], $field->properties, $field->ID);
                     break;
                 case "radio":
-                    $list[] = $this->radioButtonField($field->name, $field->attributes, $field->ID);
+                    $list[] = $this->radioButtonField($field->name, $field->attributes, $field->properties, $field->ID);
                     break;
                 case "radiobutton":
-                    $list[] = $this->radioButtonField($field->name, $field->attributes, $field->ID);
+                    $list[] = $this->radioButtonField($field->name, $field->attributes, $field->properties, $field->ID);
                     break;
                 case "check":
-                    $list[] = $this->checkboxField($field->name, $field->attributes, $field->ID);
+                    $list[] = $this->checkboxField($field->name, $field->attributes, $field->properties, $field->ID);
                     break;
                 case "checkbox":
-                    $list[] = $this->checkboxField($field->name, $field->attributes, $field->ID);
+                    $list[] = $this->checkboxField($field->name, $field->attributes, $field->properties, $field->ID);
                     break;
                 case "textarea":
-                    $list[] = $this->textArea($field->name, $field->properties['value'], $field->attributes, $field->ID);
+                    $list[] = $this->textArea($field->name, $field->properties['value'], $field->attributes, $field->properties, $field->ID);
                     break;
                 default:
-                    $list[] = $this->textField($field->name, $field->attributes, $field->ID);
+                    $list[] = $this->textField($field->name, $field->attributes, $field->properties, $field->ID);
                     break;
             }
 
