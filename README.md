@@ -15,6 +15,7 @@ HTML Builder and Render Engine for WPExpress.
 
 - Added method FieldCollection/parse
 - Renamed Tags to HTMLFieldParser
+- Added FieldCollection class
 - Renamed UI to BaseResources 
 - Dropped UI folder
 
