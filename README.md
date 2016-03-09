@@ -13,6 +13,9 @@ HTML Builder and Render Engine for WPExpress.
 
 ###Version 1.0.0
 
+- Simplified BaseSettings Page
+- Fixed attribution error on FieldCollection setProperty and setAttribute
+- Removed field methods from BaseSettingsPage
 - Added method FieldCollection/parse
 - Renamed Tags to HTMLFieldParser
 - Added FieldCollection class

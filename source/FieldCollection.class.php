@@ -47,6 +47,7 @@ class FieldCollection implements \ArrayAccess, \Countable
     public function field( $name )
     {
         $this->selectedFieldName = isset( $this->container[$name] ) ? $name : false;
+        return $this;
     }
 
     public function addHiddenInput( $name )
@@ -97,14 +98,14 @@ class FieldCollection implements \ArrayAccess, \Countable
     public function setAttribute( $att, $value )
     {
         if( $this->selectedFieldName !== false ) {
-            $this->container[$this->selectedFieldName]['attributes'][$att] = $value;
+            $this->container[$this->selectedFieldName]->attributes[$att] = $value;
         }
     }
 
     public function setAttributes( $atts )
     {
         if( $this->selectedFieldName !== false ) {
-            $this->container[$this->selectedFieldName]['attributes'] = $atts;
+            $this->container[$this->selectedFieldName]->attributes = $atts;
         }
         return $this;
     }
@@ -112,7 +113,7 @@ class FieldCollection implements \ArrayAccess, \Countable
     private function setProperty( $property, $value )
     {
         if( $this->selectedFieldName !== false ) {
-            $this->container[$this->selectedFieldName]['properties'][$property] = $value;
+            $this->container[$this->selectedFieldName]->properties[$property] = $value;
         }
         return $this;
     }
@@ -124,11 +125,19 @@ class FieldCollection implements \ArrayAccess, \Countable
         return $this;
     }
 
+    public function getValue()
+    {
+        return isset( $this->container[$this->selectedFieldName]->properties['value'] ) ? $this->container[$this->selectedFieldName]->properties['value'] : null;
+    }
+
     public function setValue( $value )
     {
         $this->setProperty('value', $value);
         return $this;
     }
+
+
+    /****ArrayField Methods****/
 
 
     /****Parse HTML****/
