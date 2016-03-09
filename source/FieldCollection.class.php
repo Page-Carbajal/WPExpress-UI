@@ -165,7 +165,7 @@ class FieldCollection implements \ArrayAccess, \Countable
 
     public function count()
     {
-        count($this->container);
+        return count($this->container);
     }
 
 }
