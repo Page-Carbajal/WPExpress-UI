@@ -11,13 +11,12 @@ class HTMLFieldParser
 {
 
     // This class is inspired by Groovy's FormTagLib.groovy
-    // https://github.com/grails/grails-core/blob/0b1d6a6d02f2217643a69e8314f76078dacbce32/grails-plugin-gsp/src/main/groovy/org/grails/plugins/web/taglib/FormTagLib.groovy
 
     private $fieldCollection;
 
     public function __construct( $fields )
     {
-        if( !empty( $fields ) && ( $fields instanceof FieldCollection ) ) {
+        if( !empty( $fields ) ) {
             $this->fields = $fields;
             $this->parseFields();
         }
@@ -94,7 +93,7 @@ class HTMLFieldParser
      * @param $attributes
      * @return bool|string
      */
-    public static function selectField( $name, $options, $attributes )
+    public static function selectField( $name, $options, $attributes, $ID = null )
     {
         if( empty( $name ) ) {
             return false;
@@ -157,25 +156,25 @@ class HTMLFieldParser
             switch( $field->type ) {
                 case "select":
                     // Why not simply pass the field object? Well, we could, but we'll be forcing you to use our FieldCollection. So we keep it cool.
-                    $list[] = $this->selectField($field->name, $field->properties['options'], $field->attributes);
+                    $list[] = $this->selectField($field->name, $field->properties['options'], $field->attributes, $field->ID);
                     break;
                 case "radio":
-                    $list[] = $this->radioButtonField($field->name, $field->attributes);
+                    $list[] = $this->radioButtonField($field->name, $field->attributes, $field->ID);
                     break;
                 case "radiobutton":
-                    $list[] = $this->radioButtonField($field->name, $field->attributes);
+                    $list[] = $this->radioButtonField($field->name, $field->attributes, $field->ID);
                     break;
                 case "check":
-                    $list[] = $this->checkboxField($field->name, $field->attributes);
+                    $list[] = $this->checkboxField($field->name, $field->attributes, $field->ID);
                     break;
                 case "checkbox":
-                    $list[] = $this->checkboxField($field->name, $field->attributes);
+                    $list[] = $this->checkboxField($field->name, $field->attributes, $field->ID);
                     break;
                 case "textarea":
-                    $list[] = $this->textArea($field->name, $field->properties['value'], $field->attributes);
+                    $list[] = $this->textArea($field->name, $field->properties['value'], $field->attributes, $field->ID);
                     break;
                 default:
-                    $list[] = $this->textField($field->name, $field->attributes);
+                    $list[] = $this->textField($field->name, $field->attributes, $field->ID);
                     break;
             }
 

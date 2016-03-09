@@ -22,8 +22,9 @@ class FieldCollection implements \ArrayAccess, \Countable
     {
         $field = new \stdClass();
 
-        $field->id         = $name;
-        $field->name       = $name;
+        $field->ID         = strtolower($name);
+        $field->name       = strtolower($name);
+        $field->type       = $type;
         $field->value      = '';
         $field->attributes = array();
         $field->properties = array();
@@ -90,7 +91,7 @@ class FieldCollection implements \ArrayAccess, \Countable
     public function setID( $ID )
     {
         if( $this->selectedFieldName !== false ) {
-            $this->container[$this->selectedFieldName]['ID'] = $ID;
+            $this->container[$this->selectedFieldName]->ID = $ID;
         }
         return $this;
     }
@@ -100,6 +101,7 @@ class FieldCollection implements \ArrayAccess, \Countable
         if( $this->selectedFieldName !== false ) {
             $this->container[$this->selectedFieldName]->attributes[$att] = $value;
         }
+        return $this;
     }
 
     public function setAttributes( $atts )
