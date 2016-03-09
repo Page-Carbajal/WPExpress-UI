@@ -58,7 +58,7 @@ final class RenderEngine
         }
 
         if( !$success ) {
-            trigger_error('Error: Cant write in the specified template path. Check for permissions. - WPExpress/UI @ RenderEngine');
+            trigger_error('Error: Cant write in the specified template path. Check for permissions. - WPExpress/UI @ RenderEngine', E_USER_WARNING);
         }
 
         return $this;
