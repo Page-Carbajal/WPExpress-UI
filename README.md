@@ -14,6 +14,7 @@ HTML Builder and Render Engine for WPExpress.
 
 ###Version 0.5.4 
 
+- Added warning for empty options to Tags/selectField
 - RenderEngine/createDirectoryStructure triggers a warning instead of an error 
 
 ###Version 0.5.3

@@ -103,6 +103,11 @@ class Tags
             return false;
         }
 
+        if( empty($options) ){
+            trigger_error("Object <strong>{$name}</strong> has no valid options!", E_USER_WARNING);
+            return false;
+        }
+
         $properties = array( 'id' => $name, 'name' => $name );
         $source = '';
 
