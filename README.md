@@ -11,11 +11,21 @@ HTML Builder and Render Engine for WPExpress.
 
 - Create Formatting class a port of WordPress functions to sanitize titles and file names
 
+###Version 1.0.2 - Single Render Event
+
+- Added method BaseSettingsPage/actionHookIsValid to prevent double rendering
+- Simplified the constructor to allow for convention over configuration 
+- Added BaseSettingsPage/setTopParentMenu
+
+###Version 1.0.1 - Damn bugs
+
+- Added method FieldCollection/toArray
+- Renamed the method BaseSettingsPage/getFieldValue to getOptionValue
+
+
 ###Version 1.0.0 - Release Candidate 1
 
 - Finished small touches on HTMLFieldParser and FieldCollection
-- Added method FieldCollection/toArray
-- Renamed the method BaseSettingsPage/getFieldValue to getOptionValue
 - Fixed HTMLFieldParser/textArea method
 - Added support for custom field IDs on HTMLFieldParser/parseFields
 - Fixed FieldsCollection newField/type error
