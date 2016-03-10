@@ -14,6 +14,7 @@ HTML Builder and Render Engine for WPExpress.
 ###Version 1.0.0 - Release Candidate 1
 
 - Finished small touches on HTMLFieldParser and FieldCollection 
+- Renamed the method BaseSettingsPage/getFieldValue to getOptionValue
 - Fixed HTMLFieldParser/textArea method
 - Added support for custom field IDs on HTMLFieldParser/parseFields
 - Fixed FieldsCollection newField/type error

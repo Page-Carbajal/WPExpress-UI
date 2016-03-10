@@ -149,8 +149,14 @@ class FieldCollection implements \ArrayAccess, \Countable
         return $parser->parseFields();
     }
 
+    public function toArray()
+    {
+        return $this->container;
+    }
+
     /*****Contracts*****/
     /*****Implement Interface Methods*******/
+    // ArrayAccess Methods
     public function offsetSet( $offset, $value )
     {
         if( !empty( $offset ) ) {
@@ -174,6 +180,7 @@ class FieldCollection implements \ArrayAccess, \Countable
         return isset( $this->container[$offset] ) ? $this->container[$offset] : null;
     }
 
+    // Countable Methods
     public function count()
     {
         return count($this->container);
