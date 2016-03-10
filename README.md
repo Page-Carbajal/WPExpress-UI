@@ -10,9 +10,17 @@ HTML Builder and Render Engine for WPExpress.
 
 
 - Create Formatting class a port of WordPress functions to sanitize titles and file names
+- Custom Fields
+    - Create FieldsCollection/registerCustomField($fieldName, CustomField $callback) method
+        - $fieldName defines the name of the field, to be created
+        - CustomField is an Abstract class forcing the object to implement methods like render and so on
+        - Add CustomField class
+        - Samples
+            - http://omarello.com/2010/08/grails-custom-tags-diy/
+            - http://twig.sensiolabs.org/doc/advanced.html
 
 
-###Version 1.0.3 - Input fields bug fix!
+###Version 1.0.3 - Input fields bug fix
 
 - Fixed missing value on input fields
 
