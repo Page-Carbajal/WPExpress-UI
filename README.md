@@ -11,6 +11,12 @@ HTML Builder and Render Engine for WPExpress.
 
 - Create Formatting class a port of WordPress functions to sanitize titles and file names
 
+
+###Version 1.0.3 - Input fields bug fix!
+
+- Fixed missing value on input fields
+
+
 ###Version 1.0.2 - Single Render Event
 
 - Added method BaseSettingsPage/actionHookIsValid to prevent double rendering

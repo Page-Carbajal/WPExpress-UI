@@ -46,8 +46,11 @@ class HTMLFieldParser
     {
         $controlID       = empty( $ID ) ? $name : $ID;
         $baseAttributes  = array( 'type' => $type, 'id' => $controlID, 'name' => $name );
-        $attString       = self::arrayToHTMLAttributes(array_merge($baseAttributes, $attributes));
         $fieldProperties = empty( $fieldProperties ) ? array() : ( is_array($fieldProperties) ? $fieldProperties : array( $fieldProperties ) );
+        if(isset($fieldProperties['value'])){
+            $baseAttributes['value'] = $fieldProperties['value'];
+        }
+        $attString       = self::arrayToHTMLAttributes(array_merge($baseAttributes, $attributes));
 
         $field             = new \stdClass();
         $field->html       = "<input {$attString} />";
