@@ -19,6 +19,10 @@ HTML Builder and Render Engine for WPExpress.
             - http://omarello.com/2010/08/grails-custom-tags-diy/
             - http://twig.sensiolabs.org/doc/advanced.html
 
+###Version 1.0.5 - Fixed BaseSettingsPage FieldCollection/parseFields bug
+
+- Fixed the error of trying to parse an empty FieldCollection
+
 ###Version 1.0.4 - FieldCollection and HTMLParser
 
 - Implemented subset for HTMLParser/parseFields

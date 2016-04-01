@@ -182,6 +182,10 @@ class FieldCollection implements \ArrayAccess, \Countable
     /****Parse HTML****/
     public function parseFields( $subset = null )
     {
+        if( empty($this->container) ){
+            return null;
+        }
+
         $fields = $this->container;
         if( is_array($subset) && count($subset) > 0 ) {
             $keys = array_keys($fields);
