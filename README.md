@@ -2,4 +2,5 @@
 
 HTML Builder and Render Engine for the WPExpress Framework.
 
-##TODO: Develop Documentation 
+This project is no longer being maintained and has been assimilated into WPExpress
+
