@@ -2,6 +2,7 @@
     "name": "page-carbajal/wpexpress-ui",
     "description": "HTML Helper and Render Engine for WPExpress.",
     "type": "library",
+    "license": "GPL-3.0-or-later",
     "autoload": {
         "psr-4":{
             "WPExpress\\": "source/"
@@ -11,7 +12,6 @@
         "twig/twig": "^1.23",
         "mustache/mustache": "^2.9"
     },
-    "license": "GPL3",
     "authors": [
         {
             "name": "Page Carbajal",

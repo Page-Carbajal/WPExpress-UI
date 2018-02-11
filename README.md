@@ -2,5 +2,6 @@
 
 HTML Builder and Render Engine for the WPExpress Framework.
 
-This project is no longer being maintained and has been assimilated into WPExpress
+This project is no longer being maintained.
 
+The relevant parts of this projects have been assimilated into [WPExpress Framework](https://github.com/Page-Carbajal/WPExpress).
