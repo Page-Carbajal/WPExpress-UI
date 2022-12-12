@@ -5,12 +5,12 @@
     "license": "GPL-3.0-or-later",
     "autoload": {
         "psr-4":{
-            "WPExpress\\": "source/"
+            "WPExpress\\UI\\": "source/"
         }
     },
     "require": {
-        "twig/twig": "^1.23",
-        "mustache/mustache": "^2.9"
+        "twig/twig": "^3.4",
+        "mustache/mustache": "^2.14"
     },
     "authors": [
         {

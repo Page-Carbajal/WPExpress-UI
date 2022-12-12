@@ -1,7 +1,7 @@
-##Change Log
+# Change Log
 
 
-###TO DO
+### TO DO
 
 - Improve Documentation
 - Create Formatting class a port of WordPress functions to sanitize titles and file names
@@ -14,9 +14,15 @@
             - http://omarello.com/2010/08/grails-custom-tags-diy/
             - http://twig.sensiolabs.org/doc/advanced.html
 
-###Version 2.0.0
+### Version 2.1.0
+
+### December 12th - Version 2.1.0 
+
+- Refactored class names from .class.php to .php
+- Upgraded versions of twig and mustache
+
             
-####BaseRenderEngine
+#### BaseRenderEngine
 
 - Implemented new RenderEngine class extending BaseRenderEngine
 - Deprecated Previous RenderEngine 
@@ -25,36 +31,36 @@
 - Add BaseRenderEngine class
 
 
-###Version 1.0.5 - Fixed BaseSettingsPage FieldCollection/parseFields bug
+### Version 1.0.5 - Fixed BaseSettingsPage FieldCollection/parseFields bug
 
 - Fixed the error of trying to parse an empty FieldCollection
 
 
-###Version 1.0.4 - FieldCollection and HTMLParser
+### Version 1.0.4 - FieldCollection and HTMLParser
 
 - Implemented subset for HTMLParser/parseFields
 - Added sanitize_title to ID and Name properties on FieldCollection
 - Added extra getters and setters for FieldCollection
 
 
-###Version 1.0.3 - Input fields bug fix
+### Version 1.0.3 - Input fields bug fix
 
 - Fixed missing value on input fields
 
 
-###Version 1.0.2 - Single Render Event
+### Version 1.0.2 - Single Render Event
 
 - Added method BaseSettingsPage/actionHookIsValid to prevent double rendering
 - Simplified the constructor to allow for convention over configuration 
 - Added BaseSettingsPage/setTopParentMenu
 
-###Version 1.0.1 - Damn bugs
+### Version 1.0.1 - Damn bugs
 
 - Added method FieldCollection/toArray
 - Renamed the method BaseSettingsPage/getFieldValue to getOptionValue
 
 
-###Version 1.0.0 - Release Candidate 1
+### Version 1.0.0 - Release Candidate 1
 
 - Finished small touches on HTMLFieldParser and FieldCollection
 - Fixed HTMLFieldParser/textArea method
@@ -70,24 +76,24 @@
 - Dropped UI folder
 
 
-###Version 0.5.4 
+### Version 0.5.4 
 
 - Added warning for empty options to Tags/selectField
 - RenderEngine/createDirectoryStructure triggers a warning instead of an error 
 
-###Version 0.5.3
+### Version 0.5.3
 
 - Added radio button and text area HTML tags
 
 
-###Version 0.5.2 - Updated dependencies, removed tests files
+### Version 0.5.2 - Updated dependencies, removed tests files
 
 - Added vendor directory and composer.lock to gitignore
 - Removed the vendor directory
 - Updated twig version
 
 
-###Version 0.5.1 - Fixed: Exception on renderMustacheTemplate
+### Version 0.5.1 - Fixed: Exception on renderMustacheTemplate
 
 - Added exception for cache directory on renderTwigTemplate method
 - Added warning if missing partials directory
@@ -96,7 +102,7 @@
 - Adopted [Semantic Versioning](http://semver.org)
 
 
-###Version 0.5
+### Version 0.5
 
 - Fixed errors on the RenderEngine class
 - Made the RenderEngine class final
@@ -106,6 +112,6 @@
 - Added the RenderEngine/createDirectoryStructure method
 - Remove WordPress specific functions dependencies
 
-###Version 0.4
+### Version 0.4
 
 - Last stable version
