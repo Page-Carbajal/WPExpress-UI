@@ -18,6 +18,7 @@
 
 ### December 12th - Version 2.1.0 
 
+- Renamed branch from master to main
 - Refactored class names from .class.php to .php
 - Upgraded versions of twig and mustache
 
